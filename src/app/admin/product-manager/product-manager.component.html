@@ -1,0 +1,51 @@
+ <!-- Page Heading -->
+ <h1 class="h3 mb-2 text-gray-800">Product Manger</h1>
+         
+ <!-- DataTales Example -->
+ <div class="card shadow mb-4">
+   <div class="card-header py-3">
+     <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+   </div>
+   <div class="card-body">
+     <div class="table-responsive">
+       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+         <thead>
+           <tr>
+             <th>ID</th>
+             <th>Name</th>
+             <th>Price</th>
+             <th>Desc</th>
+             <th>Statuc</th>
+             <th>Img</th>
+             <th>Action</th>
+           </tr>
+         </thead>
+        
+         <tbody>
+           <tr *ngFor="let product of products | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+<th scope="row">{{product.id}}</th>
+<td>{{product.name}}</td>
+<td>{{product.price}}</td>
+<td>{{product.desc}}</td>
+<td>{{product.status}}</td>
+<td><img [src]="product.img" width="100px"/></td>
+<td>
+<button class="btn btn2 btn-primary" routerLink="/admin/product/edit/{{product.id}}">Edit</button>
+<br><br>
+<button class="btn btn2 btn-primary" (click)="removeItem(product.id)">Delete</button></td>
+</tr>
+         </tbody>
+       </table>
+       <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+        </ngb-pagination>
+      
+        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+          <option [ngValue]="3">3 items per page</option>
+          <option [ngValue]="6">6 items per page</option>
+          <option [ngValue]="9">9 items per page</option>
+        </select>
+     </div>
+   </div>
+ </div>
+

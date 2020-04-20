@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "Assignment": {
@@ -24,9 +24,19 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/sb-admin-2.css",
+              "src/assets/css/set1.css",
+              "src/assets/css/lightbox.css",
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/fontawesome-all.min.css",
+              "src/assets/css/style.css"
+              
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/sb-admin-2.js",
+              "src/assets/js/sb-admin-2.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -119,6 +129,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Assignment"
+    }
+  },
+  "defaultProject": "Assignment",
+  "cli": {
+    "analytics": false
+  }
 }
