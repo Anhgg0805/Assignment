@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Assignment</title>
+  <base href="/Assignment/">  
+  <!-- <title>Jeweler a Fashion Category Bootstrap Responsive Web Template| Home :: w3layouts</title> -->
+      <!--meta tags -->
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="keywords" content="Jeweler Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+      <script>
+         addEventListener("load", function () {
+         	setTimeout(hideURLbar, 0);
+         }, false);
+         
+         function hideURLbar() {
+         	window.scrollTo(0, 1);
+         }
+      </script>
+      <!--//meta tags ends here-->
+      <!--booststrap-->
+      <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+      <!--//booststrap end-->
+      <!-- font-awesome icons -->
+      <link href="/assets/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
+      <!-- //font-awesome icons -->
+      <!--stylesheets-->
+      <link href="/assets/css/style.css" rel='stylesheet' type='text/css' media="all">
+      <!--//stylesheets-->
+      <link href="//fonts.googleapis.com/css?family=Montserrat:300,400,500" rel="stylesheet">
+      <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" rel="stylesheet">
+<link rel="stylesheet" href="styles.eac49cfc0544774022e0.css"></head>
+<body>
+  <app-root></app-root>
+<script src="runtime-es2015.0811dcefd377500b5b1a.js" type="module"></script><script src="runtime-es5.0811dcefd377500b5b1a.js" nomodule defer></script><script src="polyfills-es5.144e932c690e726322b4.js" nomodule defer></script><script src="polyfills-es2015.51fdc9bf98fe3fa46c2c.js" type="module"></script><script src="scripts.2464e6224c860c8894b6.js" defer></script><script src="main-es2015.3f0ae587517927caa5fb.js" type="module"></script><script src="main-es5.3f0ae587517927caa5fb.js" nomodule defer></script></body>
+<!--js working-->
+<script src='/assets/js/jquery-2.2.3.min.js'></script>
+<!--//js working-->
+<!--responsiveslides banner-->
+<script src="/assets/js/responsiveslides.min.js"></script>
+<script>
+   // You can also use "$(window).load(function() {"
+   $(function () {
+     // Slideshow 4
+     $("#slider4").responsiveSlides({
+       auto: true,
+       pager:false,
+       nav:true ,
+       speed: 900,
+       namespace: "callbacks",
+       before: function () {
+         $('.events').append("<li>before event fired.</li>");
+       },
+       after: function () {
+         $('.events').append("<li>after event fired.</li>");
+       }
+     });
+   
+   });
+</script>
+<!--// responsiveslides banner-->	  
+<!--responsive tabs-->	 
+<script src="/assets/js/easy-responsive-tabs.js"></script>
+<script>
+   $(document).ready(function () {
+   $('#horizontalTab').easyResponsiveTabs({
+   type: 'default', //Types: default, vertical, accordion           
+   width: 'auto', //auto or any width like 600px
+   fit: true,   // 100% fit in a container
+   closed: 'accordion', // Start closed if in accordion view
+   activate: function(event) { // Callback function if tab is switched
+   var $tab = $(this);
+   var $info = $('#tabInfo');
+   var $name = $('span', $info);
+   $name.text($tab.text());
+   $info.show();
+   }
+   });
+   });
+    
+</script>
+<!--// responsive tabs-->	 
+<!-- password-script -->
+<script>
+   var password = document.getElementById("password")
+    , confirm_password = document.getElementById("confirm_password");
+   
+   function validatePassword(){
+    if(password.value != confirm_password.value) {
+      confirm_password.setCustomValidity("Passwords Don't Match");
+    } else {
+      confirm_password.setCustomValidity('');
+    }
+   }
+   
+   password.onchange = validatePassword;
+   confirm_password.onkeyup = validatePassword;
+</script>
+<!--//password-script -->
+<!-- start-smoth-scrolling -->
+<script src="/assets/js/move-top.js"></script>
+<script src="/assets/js/easing.js"></script>
+<script>
+   jQuery(document).ready(function ($) {
+     $(".scroll").click(function (event) {
+       event.preventDefault();
+       $('html,body').animate({
+         scrollTop: $(this.hash).offset().top
+       }, 900);
+     });
+   });
+</script>
+<!-- start-smoth-scrolling -->
+<!-- here stars scrolling icon -->
+<script>
+   $(document).ready(function () {
+   
+     var defaults = {
+       containerID: 'toTop', // fading element id
+       containerHoverID: 'toTopHover', // fading element hover id
+       scrollSpeed: 1200,
+       easingType: 'linear'
+     };
+   
+   
+     $().UItoTop({
+       easingType: 'easeOutQuart'
+     });
+   
+   });
+</script>
+<!-- //here ends scrolling icon -->
+<!--bootstrap working-->
+<script src="/assets/js/bootstrap.min.js"></script>
+<!-- //bootstrap working-->
+</html>
