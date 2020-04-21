@@ -1708,7 +1708,7 @@ pre code {
   border: 0;
 }
 
-.form-control {
+  /* .form-control {
   display: block;
   width: 100%;
   height: calc(1.5em + 0.75rem + 2px);
@@ -1722,7 +1722,7 @@ pre code {
   border: 1px solid #d1d3e2;
   border-radius: 0.35rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
+} */
 
 @media (prefers-reduced-motion: reduce) {
   .form-control {
