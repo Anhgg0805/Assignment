@@ -254,6 +254,9 @@ display: inline;
 float: none;
 margin-right: 1px;
 }
+.ngb-highlight {
+    background-color: yellow;
+}
 .rslides_tabs a {
 width: auto;
 line-height: 20px;

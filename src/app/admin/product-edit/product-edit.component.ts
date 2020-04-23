@@ -10,10 +10,11 @@ import {Product} from '../../Product';
 })
 export class ProductEditComponent implements OnInit {
   product:Product;
+  url:string | ArrayBuffer;
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router  
   ) { }
 
   ngOnInit() {
@@ -24,11 +25,13 @@ export class ProductEditComponent implements OnInit {
       this.productService.getProduct(param.id).subscribe(data =>{
         // console.log(data);
         this.product=data;
+        this.url=this.product.img;
       })
       console.log(param);
     })
   }
   edit(){
+    this.product.img= this.url;
     this.productService.editProduct(this.product).subscribe(data =>{
       console.log(data);
       this.router.navigate(['/admin/product-manager']);
@@ -36,4 +39,21 @@ export class ProductEditComponent implements OnInit {
     );
     
   }
+  
+  
+  getBase64(event) {
+    let me = this;
+    let file = event.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      //me.modelvalue = reader.result;
+      me.url=reader.result;
+      console.log(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+ }
+    
 }

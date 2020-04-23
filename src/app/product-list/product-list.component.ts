@@ -63,4 +63,10 @@ export class ProductListComponent implements OnInit {
       this.products=data;
     })
   }
+  getResult(){
+    this.productService.searchProduct(this.filter).subscribe(data =>{
+      console.log(data);
+      this.products=data;
+    })
+  }
 }

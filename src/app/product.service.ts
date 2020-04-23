@@ -17,6 +17,9 @@ export class ProductService {
   getProducts():Observable <Product[]> {
     return this.http.get<Product[]>(this.api);
   }
+  searchProduct(search):Observable <Product[]> {
+    return this.http.get<Product[]>(`${this.api}?search=${search}`);
+  }
   getProduct(id):Observable <Product>{
     return this.http.get<Product>(`${this.api}/${id}`);
   }

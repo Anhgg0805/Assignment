@@ -4,5 +4,5 @@ export class Product {
     price:number;
     desc:string;
     status:boolean;
-    img:string;
+    img:string | ArrayBuffer;
   }
