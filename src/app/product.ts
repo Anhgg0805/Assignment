@@ -3,6 +3,6 @@ export class Product {
     name:string;
     price:number;
     desc:string;
-    status:boolean;
-    img:string | ArrayBuffer;
+    quantily:number;
+    img:string ;
   }
