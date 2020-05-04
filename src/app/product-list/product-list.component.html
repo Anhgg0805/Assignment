@@ -1,20 +1,24 @@
 
  <h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3 py-3">Our Designs</h3>
  <form>
-   <div class="form-group form-inline">
+   <!-- <div class="form-group form-inline">
        Full text search: <input class="form-control ml-2" type="text" [formControl]="filter"/>
+   </div>
+ </form> -->
+   <div class="form-group form-inline">
+       Full text search: <input class="form-control ml-2" type="text"  type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search ..">
    </div>
  </form>
  <div class="row">
-   <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of products | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+   <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of products | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize | filter:searchText">
       <div class="card h-100">
       <img class="card-img-top" [src]="product.img"  alt="Card image cap">
       <div class="card-body">
          <!-- <h5 class="card-title">{{product.name}}</h5> -->
-         <h5><ngb-highlight [result]="product.name" [term]="filter.value"></ngb-highlight></h5>
+         <h5><ngb-highlight [result]="product.name" [term]="searchText"></ngb-highlight></h5>
          <!-- <p class="card-text">Price: ${{product.price}}
          </p> -->
-         <p class="card-text"><ngb-highlight [result]="product.name" [term]="filter.value"></ngb-highlight></p>
+         <p class="card-text"><ngb-highlight [result]="product.desc" [term]="searchText"></ngb-highlight></p>
          <div class="outs_more-buttn">
             <a routerLink="/product/{{product.id}}">Read More</a>
          </div>

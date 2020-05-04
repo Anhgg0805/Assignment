@@ -256,6 +256,7 @@ margin-right: 1px;
 }
 .ngb-highlight {
     background-color: yellow;
+    color: #000;
 }
 .rslides_tabs a {
 width: auto;

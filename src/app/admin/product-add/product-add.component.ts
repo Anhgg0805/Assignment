@@ -39,10 +39,6 @@ export class ProductAddComponent implements OnInit {
     return this.checkInput(this.productForm.controls.desc);
   }
 
-  get productQuantily(){
-    return this.checkInput(this.productForm.controls.quantily);
-  }
-
   get productImg() {
     return this.checkInput(this.productForm.controls.img);
   }
@@ -62,28 +58,22 @@ export class ProductAddComponent implements OnInit {
       // Validators.length()
       Validators.maxLength(30),
       Validators.minLength(1),
-      Validators.pattern('^[a-zA-Z]+[a-zA-Z ]*')
+      Validators.pattern('^[a-zA-Z0-9 ]+[ a-zA-Z0-9 ]*')
     ]],
     price: [null, [
       Validators.required,
       // Validators.length()
       Validators.maxLength(20),
       Validators.minLength(1),
-      Validators.pattern('[0-9]*\.[0-9]*')
+      Validators.pattern('[0-9]+\.[0-9]*'),
+      Validators.min(0)
     ]],
     desc: [null, [
       Validators.required,
       // Validators.length()
       Validators.maxLength(100),
       Validators.minLength(1),
-      Validators.pattern('^[a-zA-Z]+[ a-zA-Z ]*')
-    ]],
-    quantily: [null, [
-      Validators.required,
-      // Validators.length()
-      Validators.maxLength(20),
-      Validators.minLength(1),
-      Validators.pattern('[0-9]*')
+      Validators.pattern('^[a-zA-Z0-9 ]+[ a-zA-Z0-9 ]*')
     ]],
     img: [null, [
       Validators.required,

@@ -6,10 +6,18 @@
           <div class="hedder-up">
              <h1><a class="navbar-brand" routerLink="/home" routerLinkActive="active">Jeweler</a></h1>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+          <!-- <div id="collapseExample" [ngbCollapse]="isCollapsed">
+            <div class="card">
+              <div class="card-body">
+                You can collapse this card by clicking Toggle
+              </div>
+            </div>
+          </div> -->
+          <div class="collapse navbar-collapse justify-content-center"  [ngbCollapse]="isCollapsed" id="navbarSupportedContent">
              <ul class="navbar-nav ">
                 <li class="nav-item active">
                    <a class="nav-link" routerLink="/home" >Home <span class="sr-only">(current)</span></a>
@@ -28,7 +36,7 @@
                      </li>
              </ul>
              <div class="sing-up-jel ">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="btn btn-primary" (click)="open()"  data-target="#exampleModal">
                 Sign In
                 </button>
              </div>

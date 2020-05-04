@@ -18,6 +18,7 @@ export class ProductListComponent implements OnInit {
   filter = new FormControl('');
   selected : Product;
   products:Product[];
+  searchText:string ;
   constructor(
     private productService :ProductService,pipe: DecimalPipe
   ) { 

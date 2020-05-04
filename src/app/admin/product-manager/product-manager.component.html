@@ -1,12 +1,13 @@
  <!-- Page Heading -->
  <h1 class="h3 mb-2 text-gray-800">Product Manger</h1>
-         
+
+ <div class="form-group form-inline">
+  Full text search <input class="form-control border-0 small ml-2" type="text"  type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search ...">
+</div>
  <!-- DataTales Example -->
  <div class="card shadow mb-4">
-   <div class="card-header py-3">
-     <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-   </div>
-   <div class="card-body">
+   
+   <div class="card-body"> 
      <div class="table-responsive">
        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
          <thead>
@@ -15,24 +16,25 @@
              <th>Name</th>
              <th>Price</th>
              <th>Desc</th>
-             <th>Quantily</th>
              <th>Img</th>
-             <th>Action</th>
+             <th colspan="3">Action</th>
            </tr>
          </thead>
         
          <tbody>
-           <tr *ngFor="let product of products | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-<th scope="row">{{product.id}}</th>
-<td>{{product.name}}</td>
-<td>{{product.price}}</td>
-<td>{{product.desc}}</td>
-<td>{{product.quantily}}</td>
-<td><img [src]="product.img" width="100px"/></td>
+           <tr *ngFor="let product of products | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize | filter:searchText">
+<th scope="row"><ngb-highlight [result]="product.id" [term]="searchText"></ngb-highlight></th>
+<td><ngb-highlight [result]="product.name" [term]="searchText"></ngb-highlight></td>
+<td><ngb-highlight [result]="product.price" [term]="searchText"></ngb-highlight></td>
+<td><ngb-highlight [result]="product.desc" [term]="searchText"></ngb-highlight></td>
+<td><img [src]="product.img" width="150px"/></td>
 <td>
-<button class="btn btn2 btn-primary" routerLink="/admin/product/edit/{{product.id}}">Edit</button>
-<br><br>
-<button class="btn btn2 btn-primary" (click)="removeItem(product.id)">Delete</button></td>
+  <button class="btn btn2 btn-info" routerLink="/product/{{product.id}}">Detail</button>
+</td>
+<td><button class="btn btn2 btn-primary" routerLink="/admin/product/edit/{{product.id}}">Edit</button></td>
+
+<td>
+<button class="btn btn2 btn-warning" (click)="removeItem(product.id)">Delete</button></td>
 </tr>
          </tbody>
        </table>

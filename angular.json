@@ -35,7 +35,12 @@
             ],
             "scripts": [
               "src/assets/js/sb-admin-2.js",
-              "src/assets/js/sb-admin-2.min.js"
+              "src/assets/js/sb-admin-2.min.js",
+              "src/assets/js/chart-area-demo.js",
+              "src/assets/js/chart-bar-demo.js",
+              "src/assets/js/chart-pie-demo.js",
+              "src/assets/js/Chart.min.js"
+
             ]
           },
           "configurations": {

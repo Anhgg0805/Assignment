@@ -11,6 +11,7 @@ export class ProductManagerComponent implements OnInit {
   products:Product[];
   productNew:Product= new Product();
   product:Product;
+  searchText:string ;
   constructor(
     private productService:ProductService,
     private router: Router
