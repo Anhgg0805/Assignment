@@ -3,6 +3,7 @@ import { ProductService } from '../../product.service';
 import { ActivatedRoute, Router} from '@angular/router';
 import {Product} from '../../Product';
 import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
+import { UploadImgService } from 'src/app/upload-img.service';
 
 
 @Component({
@@ -11,13 +12,15 @@ import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
+  imageFile:File;
   product:Product;
   url:string | ArrayBuffer;
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router  ,
-    private fbuiler: FormBuilder
+    private fbuiler: FormBuilder,
+    private imageService: UploadImgService
 
   ) { }
 
@@ -63,7 +66,7 @@ export class ProductEditComponent implements OnInit {
       // Validators.length()
       Validators.maxLength(30),
       Validators.minLength(1),
-      Validators.pattern('^[a-zA-Z]+[a-zA-Z ]*')
+      Validators.pattern('^[a-zA-Z0-9]+[a-zA-Z0-9 ]*')
     ]],
     price: [null, [
       Validators.required,
@@ -77,7 +80,7 @@ export class ProductEditComponent implements OnInit {
       // Validators.length()
       Validators.maxLength(100),
       Validators.minLength(1),
-      Validators.pattern('^[a-zA-Z]+[ a-zA-Z ]*')
+      Validators.pattern('^[a-zA-Z0-9]+[ a-zA-Z0-9 ]*')
     ]],
     img: [null, [
       Validators.required,
@@ -102,7 +105,7 @@ export class ProductEditComponent implements OnInit {
      this.route.params.subscribe(param => {
       this.productService.getProduct(param.id).subscribe(data =>{
         console.log(data);
-        console.log(data.img);
+        // console.log(data.img);
         // this.product=data;
         this.url=data.img;
         this.productForm.setValue(data);
@@ -112,9 +115,14 @@ export class ProductEditComponent implements OnInit {
       // console.log(param);
     })
   }
+  async saveImg(event){
+      let image_res = await this.imageService.uploadImage(this.imageFile);
+      // console.log(image_res);
+      this.url = image_res["data"].link;
+      console.log(this.url);
+  }
   edit(){
     this.product = this.productForm.value;
-
     this.product.img= this.url.toString();
     this.productService.editProduct(this.product).subscribe(data =>{
       console.log(data);
@@ -123,7 +131,20 @@ export class ProductEditComponent implements OnInit {
     );
     
   }
-  
+  onSelectFile(event) { // called each time file input changes
+    if (event.target.files && event.target.files[0]) {
+    this.imageFile = event.target.files[0];
+
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      // tslint:disable-next-line:no-shadowed-variable
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.url = event.target.result;
+      };
+    }
+  }
   
   getBase64(event) {
     let me = this;

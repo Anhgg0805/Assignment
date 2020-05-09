@@ -3,99 +3,51 @@ import {Product} from '../../Product';
 import {ProductService} from '../../product.service';
 import { ActivatedRoute, Router} from '@angular/router';
 import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
+import { UploadImgService } from '../../upload-img.service';
 @Component({
   selector: 'app-product-add',
   templateUrl: './product-add.component.html',
   styleUrls: ['./product-add.component.css']
 })
 export class ProductAddComponent implements OnInit {
+  imageFile: File;
   link: string | ArrayBuffer;
-  
+  product:Product = new Product;
   constructor(
     private productService :ProductService,
     private router:Router,
-    private fbuiler: FormBuilder
+    private fbuiler: FormBuilder,
+    private imageService: UploadImgService
   ) { }
 
   ngOnInit() {
     
   }
-  // productForm: FormGroup;
-  product: Product = new Product();
-
-
-  get productName() {
-
-    // console.log(this.productForm.controls.name);  
-    return this.checkInput(this.productForm.controls.name);
-    
-  }
-
-  get productPrice() {
-    return this.checkInput(this.productForm.controls.price);
-  }
-
-  get productDesc() {
-    return this.checkInput(this.productForm.controls.desc);
-  }
-
-  get productImg() {
-    return this.checkInput(this.productForm.controls.img);
-  }
-
-  checkInput(value) {
-    for (let err in value.errors) {
-      if (value.dirty) {
-        return this.getErrorMes(err, value.errors[err]);
-      }
-    }
-  }
-
-  productForm = this.fbuiler.group({
-    id: new FormControl(),
-    name: [null, [
-      Validators.required,
-      // Validators.length()
-      Validators.maxLength(30),
+  //function validate
+  productForm = new FormGroup({
+    name: new FormControl('', [
+      Validators.required, 
+      Validators.minLength(3), 
+      Validators.pattern('^[a-zA-Z0-9]+[a-zA-Z0-9 ]*')]),
+    price: new FormControl('', [
+      Validators.required, 
       Validators.minLength(1),
-      Validators.pattern('^[a-zA-Z0-9 ]+[ a-zA-Z0-9 ]*')
-    ]],
-    price: [null, [
-      Validators.required,
-      // Validators.length()
-      Validators.maxLength(20),
-      Validators.minLength(1),
-      Validators.pattern('[0-9]+\.[0-9]*'),
-      Validators.min(0)
-    ]],
-    desc: [null, [
-      Validators.required,
-      // Validators.length()
-      Validators.maxLength(100),
-      Validators.minLength(1),
-      Validators.pattern('^[a-zA-Z0-9 ]+[ a-zA-Z0-9 ]*')
-    ]],
-    img: [null, [
-      Validators.required,
-      // Validators.length()
-      // Validators.maxLength(100),
-      // Validators.minLength(1),
-      // Validators.pattern('^[a-zA-Z]+[ a-zA-Z ]*')
-    ]],
+      Validators.min(0), 
+      Validators.pattern('[0-9]+\.[0-9]*')]),
+    img: new FormControl('', [Validators.required]),
+    desc: new FormControl('', [
+      Validators.required, 
+      Validators.minLength(5),
+      Validators.pattern('^[a-zA-Z0-9]+[a-zA-Z0-9 ]*')])
   });
 
-  getErrorMes(err, value) {
-    let messages = {
-      'required': 'Do not leave this field blank',
-      'maxlength': `Maximum of  ${value.requiredLength} characters`,
-      'minlength': `Minimum of ${value.requiredLength} characters`,
-      'pattern': 'wrong format',
-    };
-    return messages[err];
+  get f() {
+    return this.productForm.controls;
   }
-
   onSelectFile(event) { // called each time file input changes
     if (event.target.files && event.target.files[0]) {
+    this.imageFile = event.target.files[0];
+
       var reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
@@ -119,13 +71,19 @@ export class ProductAddComponent implements OnInit {
       console.log('Error: ', error);
     };
  }
-    addProduct(){
+    async addProduct(){
+      let image_res = await this.imageService.uploadImage(this.imageFile);
       this.product = this.productForm.value;
-      this.product.img= this.link.toString();
+      // console.log(image);
+      this.product.img = image_res["data"].link;
+      console.log(this.product.img);
+      
+      // this.product.img= this.link.toString();
     this.productService.addProduct(this.product).subscribe(data => {
       // console.log(this.product);
     this.router.navigate(['/admin/product-manager'])
     });
     
 }
+  
 }

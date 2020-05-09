@@ -19,7 +19,7 @@
 <img [src]="url" height="200"> <br/>
     <!-- <img [src]="reader.result" height="200"> -->
     <!-- <input type="type"  name="img" [(ngModel)]="product.img" /> -->
-    <input type='file'  (change)="getBase64($event)" formControlName="img">
+    <input type='file'  (change)="onSelectFile($event)" (change)="saveImg($event)" formControlName="img">
     <label *ngIf="productImg" class="text-danger"> {{productImg}}</label>
     </div>
     
